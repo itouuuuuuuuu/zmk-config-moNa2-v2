@@ -87,6 +87,7 @@
     x-codes = <INPUT_REL_X>;
     y-codes = <INPUT_REL_Y>;
     xy-to-scroll-enabled;
+    y-invert;                       /* 縦スクロール方向を反転 (DYA Studio で設定した値を初期値として固定) */
     active-layers = <0x00000020>;  /* layer5 (NUM_SCRL, Tab 長押し) */
     scale-multiplier = <1>;
     scale-divisor = <4>;            /* スクロール速度。大きいほど遅い。Studioで調整可 */

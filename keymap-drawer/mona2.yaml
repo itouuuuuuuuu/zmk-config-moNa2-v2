@@ -59,7 +59,7 @@ layers:
   - +
   - ':'
   - '='
-  - {t: ▽, type: trans}
+  - Gui+-
   - LEFT ARROW
   - DOWN ARROW
   - UP ARROW

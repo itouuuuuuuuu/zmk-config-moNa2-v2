@@ -13,16 +13,36 @@ DYA Studio は ZMK Studio をベースに、
 
 ## キーマップ
 
+[zmk-config-roBa](https://github.com/itouuuuuuuuu/zmk-config-roBa) と同じキーマップを移植しています。
+moNa2 は roBa に比べて 2 行目の左内側キー (roBa では `Cmd+-`) が 1 つ無いため、その位置だけ除いています。
+macOS 前提 (LG = Command、LA = Option)。日本語入力は `LANG1` / `LANG2` で切り替えます。
+
 ![moNa2 keymap](keymap-drawer/mona2.svg)
 
 [keymap-drawer YAML](keymap-drawer/mona2.yaml) / [SVGを開く](keymap-drawer/mona2.svg)
+
+| 番号 | 名前 (display-name) | 入り方 | 内容 |
+|---|---|---|---|
+| 0 | default_layer (DEFAULT) | - | QWERTY。ホームロウの A と X・C は mod-tap |
+| 1 | layer_1 (SYM) | `&mo 1` (左親指) | 記号と矢印 |
+| 2 | layer_2_mouse_click_and_func (FUNC) | Space 長押し | F1〜F12、マウスクリック、Ctrl+矢印 |
+| 3 | layer_3_text_select (TXT_SEL) | `&mo 3` | Cmd+矢印、Cmd+Shift+矢印 |
+| 4 | layer_4_mouse_layer (MOUSE) | 入る経路なし (DYA Studio の自動マウスレイヤー用に確保) | マウスクリック |
+| 5 | layer_5_mouse_layer (NUM_SCRL) | Tab 長押し | テンキー、スクリーンショット。トラックボールがスクロールになる |
+| 6 | layer_6 (OPT_ARW) | `&mo 6` | Option+矢印、Option+Shift+矢印 |
+| 7 | layer_7_change_browser_tab (TAB) | LANG2 長押し | Cmd+数字 (ブラウザタブ切替) |
+| 8 | layer_8_move_window (WIN_MGMT) | Q 長押し | Ctrl+Shift+文字 (ウィンドウ管理アプリ用)。**W の位置が `&studio_unlock`** |
+
+トラックボールのスクロールレイヤーは `boards/shields/mona2/mona2_r.overlay` の
+`scroll_runtime_input_processor` の `active-layers` (bitmask、現在は layer 5 = `0x20`) で指定しています。
+DYA Studio から再ビルドなしで変更できます。
 
 ## DYA Studio の使い方
 
 1. 本リポジトリをビルドし、生成された `mona2_r-...uf2`（中央側＝右手）と `mona2_l-...uf2`（周辺側＝左手）をそれぞれの XIAO BLE に書き込みます。
 2. 中央側（右手）を **USB ケーブル** で PC に接続します。
 3. Chrome / Edge などの WebUSB 対応ブラウザで **[https://studio.dya.cormoran.works/](https://studio.dya.cormoran.works/)** を開きます。
-4. キーボード側で `BLE` レイヤー(レイヤー10/11)を有効にし、右下に配置した **`&studio_unlock`** キーを押してアンロック。
+4. キーボード側で **Q を長押し (レイヤー 8) しながら W** を押して **`&studio_unlock`** を実行し、アンロック。
 5. DYA Studio 側で「Connect」を押し、USB デバイスとして mona2 を選択。
 6. キーマップ／トラックボール設定／バッテリ履歴を編集できます。
 
@@ -34,8 +54,8 @@ DYA Studio は ZMK Studio をベースに、
 | DYA Studio モジュール 4 本を west.yml に追加 (ble-management / battery-history / settings-rpc / runtime-input-processor) | `config/west.yml` |
 | Studio 系 CONFIG (`CONFIG_ZMK_STUDIO`, `CONFIG_ZMK_BLE_MANAGEMENT`, `CONFIG_ZMK_BATTERY_HISTORY`, `CONFIG_ZMK_SETTINGS_RPC`, `CONFIG_ZMK_RUNTIME_INPUT_PROCESSOR`, `CONFIG_ZMK_RUNTIME_INPUT_PROCESSOR_STUDIO_RPC`) | `config/mona2_r.conf` |
 | トラックボール処理を Runtime Input Processor に置換 | `boards/shields/mona2/mona2.dtsi`, `mona2_r.overlay` |
-| `&studio_unlock` を `ble_win` / `ble_mac` レイヤー右上に配置 | `config/mona2.keymap` |
-| 全レイヤーに `display-name` を設定 (DYA Studio 上で `WIN / MAC / NUM_W / NUM_M / MOUSE_W / MOUSE_M / SCRL_W / SCRL_M / FN_W / FN_M / BLE_W / BLE_M` と表示) | `config/mona2.keymap` |
+| `&studio_unlock` をレイヤー 8 (Q 長押し) の W の位置に配置 | `config/mona2.keymap` |
+| 全レイヤーに `display-name` を設定 (DYA Studio 上で `DEFAULT / SYM / FUNC / TXT_SEL / MOUSE / NUM_SCRL / OPT_ARW / TAB / WIN_MGMT` と表示) | `config/mona2.keymap` |
 | `studio-rpc-usb-uart` snippet (中央側) | `build.yaml` |
 
 > **Note:**

@@ -78,7 +78,7 @@
    xy-to-scroll-enabled でスクロールに変換する形に切替える。
 
    ・active-layers : デフォルトのスクロールレイヤー bitmask
-                     bit6=scroll_win, bit7=scroll_mac → 0x000000C0
+                     bit5=layer_5_mouse_layer (NUM_SCRL) → 0x00000020
                      DYA Studio から変更可能(再ビルド不要)
    ・xy-to-scroll-enabled : REL_X→HWHEEL, REL_Y→WHEEL に変換
                             こちらも Studio から ON/OFF 可能
@@ -87,7 +87,7 @@
     x-codes = <INPUT_REL_X>;
     y-codes = <INPUT_REL_Y>;
     xy-to-scroll-enabled;
-    active-layers = <0x000000C0>;  /* layer6 + layer7 */
+    active-layers = <0x00000020>;  /* layer5 (NUM_SCRL, Tab 長押し) */
     scale-multiplier = <1>;
     scale-divisor = <4>;            /* スクロール速度。大きいほど遅い。Studioで調整可 */
     /* 軸ロック(縦のみ等)が欲しければ AXIS_SNAP_MODE_Y を初期値に */

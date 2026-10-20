@@ -107,6 +107,7 @@ roBa のキーマップを移植するときは、各レイヤーから roBa の
 |---|---|---|---|
 | `cpi` | `mona2_r.overlay` (trackball_central) | 600 | カーソル感度 |
 | `invert-x` | 同上 | 有効 | COROPIT 版の X 軸反転。`invert-y` はこの個体では不要 |
+| `force-awake` + `force-awake-4ms-mode` | 同上 | 有効 | ZMK が ACTIVE の間はセンサーを RUN に固定し、サンプリングを 4ms にする。roBa (kumamuk-git 版ドライバ) が性能レジスタに書く 0x0D と同じ動作。IDLE/SLEEP では通常の省電力に戻る |
 | `active-layers` | `mona2_r.overlay` (`&scroll_runtime_input_processor`) | `0x20` (layer 5) | ボールの動きがスクロールになるレイヤーの bitmask |
 | `y-invert` | 同上 | 有効 | 縦スクロール方向の反転 |
 | `scale-divisor` | 同上 | 4 | スクロール速度。大きいほど遅い |
@@ -114,6 +115,7 @@ roBa のキーマップを移植するときは、各レイヤーから roBa の
 | `CONFIG_PMW3610_REST1_SAMPLE_TIME_MS` | `config/mona2_r.conf` | 20 | 省電力時のサンプル間隔。roBa と同じ |
 
 - 省電力の 2 項目はデフォルト (128ms / 40ms) だと動き出しが鈍く「慣性があるように」感じるため変更した。依頼がない限り戻さない。
+- `force-awake` の 2 項目は、roBa では反応するボール (Keychron) が moNa2 で反応しなかったため追加した。badjeff 版ドライバはこの指定が無いと性能レジスタ (0x11) に触らず、センサー既定の 8ms で動く。電池持ちとのトレードオフなので、不要になったら外してよい。
 - スクロール・反転・スケーリングは DYA Studio の「トラックボール」タブから再ビルドなしで変更できる。overlay の値は初期値。
 - `mona2.dtsi` 内で `runtime-input-processor.dtsi` を include してはいけない (`RC()` マクロが衝突する)。overlay 側で `#include "mona2.dtsi"` の後に include する。
 - badjeff 版ドライバには `CONFIG_PMW3610_POLLING_RATE_125_SW` や `CONFIG_PMW3610_FORCE_AWAKE` は無い。roBa の conf をそのまま持ち込まない。

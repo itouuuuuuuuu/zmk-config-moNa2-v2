@@ -65,6 +65,13 @@
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
+        /* roBa (kumamuk-git 版ドライバ) は性能レジスタ 0x11 に常に 0x0D (RUN レート 4ms) を書くが、
+           badjeff 版は force-awake が無いとこのレジスタに触らず、センサー既定の 8ms で動く。
+           roBa では反応するボール (Keychron) が moNa2 で反応しない差を埋めるため、roBa と同じ 4ms にする。
+           force-awake は ZMK が ACTIVE の間だけセンサーを RUN に固定し、IDLE/SLEEP では
+           通常の省電力 (downshift) 動作に戻る。電池持ちは多少落ちる。 */
+        force-awake;
+        force-awake-4ms-mode;
 #endif
     };
 };

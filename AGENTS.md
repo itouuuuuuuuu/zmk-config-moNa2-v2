@@ -76,7 +76,7 @@ roBa のキーマップを移植するときは、各レイヤーから roBa の
 | `lt_to_layer_0` | 長押しで `&mo`、タップで `&to 0` してからキー送出。Tab に使用 |
 | `to_layer_0` | `&to 0` + キー送出のマクロ |
 | `rsr_default` | エンコーダ用 runtime-sensor-rotate。デフォルトは音量 (時計回りで上げる)。DYA Studio からレイヤーごとに変更可能 |
-| combo `lang1` | 位置 33 + 39 (LANG2 キー + Backspace キー) の同時押しで `LANG1` |
+| combo `lang1` | 位置 33 + 41 (LANG2 キー + ESC キー) の同時押しで `LANG1` |
 
 ### 編集時の注意
 

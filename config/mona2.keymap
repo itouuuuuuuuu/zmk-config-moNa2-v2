@@ -39,10 +39,10 @@
     combos {
         compatible = "zmk,combos";
 
-        /* roBa の 34 + 40 に相当 (LANG2 キー + Backspace キー) */
+        /* LANG2 キー + ESC キーの同時押し */
         lang1 {
             bindings = <&kp LANGUAGE_1>;
-            key-positions = <33 39>;
+            key-positions = <33 41>;
         };
     };
 

@@ -105,7 +105,7 @@ roBa のキーマップを移植するときは、各レイヤーから roBa の
 
 | 設定 | 場所 | 現在値 | 意味 |
 |---|---|---|---|
-| `cpi` | `mona2_r.overlay` (trackball_central) | 600 | カーソル感度 |
+| `cpi` | `mona2_r.overlay` (trackball_central) | 1000 | カーソル感度。白く光沢のあるボール (Keychron Nape Pro 用) で小さな動きを拾うため 600 から上げた |
 | `invert-x` | 同上 | 有効 | COROPIT 版の X 軸反転。`invert-y` はこの個体では不要 |
 | `force-awake` + `force-awake-4ms-mode` | 同上 | 有効 | ZMK が ACTIVE の間はセンサーを RUN に固定し、サンプリングを 4ms にする。roBa (kumamuk-git 版ドライバ) が性能レジスタに書く 0x0D と同じ動作。IDLE/SLEEP では通常の省電力に戻る |
 | `active-layers` | `mona2_r.overlay` (`&scroll_runtime_input_processor`) | `0x20` (layer 5) | ボールの動きがスクロールになるレイヤーの bitmask |
@@ -113,6 +113,7 @@ roBa のキーマップを移植するときは、各レイヤーから roBa の
 | `scale-divisor` | 同上 | 4 | スクロール速度。大きいほど遅い |
 | `CONFIG_PMW3610_RUN_DOWNSHIFT_TIME_MS` | `config/mona2_r.conf` | 3264 | 省電力に落ちるまでの時間 (最大値)。roBa と同じ |
 | `CONFIG_PMW3610_REST1_SAMPLE_TIME_MS` | `config/mona2_r.conf` | 20 | 省電力時のサンプル間隔。roBa と同じ |
+| `CONFIG_PMW3610_SMART_ALGORITHM` | `config/mona2_r.conf` | n | ドライバ既定は y。シャッター値 45 を境にセンサーのモードを切り替える機能で、ヒステリシスが無く光沢ボールで追従が途切れるため無効化 |
 
 - 省電力の 2 項目はデフォルト (128ms / 40ms) だと動き出しが鈍く「慣性があるように」感じるため変更した。依頼がない限り戻さない。
 - `force-awake` の 2 項目は、roBa では反応するボール (Keychron) が moNa2 で反応しなかったため追加した。badjeff 版ドライバはこの指定が無いと性能レジスタ (0x11) に触らず、センサー既定の 8ms で動く。電池持ちとのトレードオフなので、不要になったら外してよい。

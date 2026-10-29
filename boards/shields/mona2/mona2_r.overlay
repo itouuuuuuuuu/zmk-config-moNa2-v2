@@ -58,7 +58,7 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        cpi = <600>;
+        cpi = <1000>;   /* 白く光沢のあるボール (Keychron Nape Pro 用) で小さな動きを拾えるよう 600 から上げた。速すぎる場合は Studio の scale-divisor で落とす */
         //swap-xy;
         invert-x;       //COROPIT版ではコメントアウトを外す
         //invert-y;     //この個体ではY軸は反転不要だったためコメントアウト

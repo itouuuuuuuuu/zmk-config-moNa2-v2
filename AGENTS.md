@@ -105,7 +105,7 @@ roBa のキーマップを移植するときは、各レイヤーから roBa の
 
 | 設定 | 場所 | 現在値 | 意味 |
 |---|---|---|---|
-| `cpi` | `mona2_r.overlay` (trackball_central) | 600 | カーソル感度 |
+| `cpi` | `mona2_r.overlay` (trackball_central) | 1000 | カーソル感度。白く光沢のあるボール (Keychron Nape Pro 用) で小さな動きを拾うため 600 から上げた |
 | `invert-x` | 同上 | 有効 | COROPIT 版の X 軸反転。`invert-y` はこの個体では不要 |
 | `force-awake` + `force-awake-4ms-mode` | 同上 | 有効 | ZMK が ACTIVE の間はセンサーを RUN に固定し、サンプリングを 4ms にする。roBa (kumamuk-git 版ドライバ) が性能レジスタに書く 0x0D と同じ動作。IDLE/SLEEP では通常の省電力に戻る |
 | `active-layers` | `mona2_r.overlay` (`&scroll_runtime_input_processor`) | `0x20` (layer 5) | ボールの動きがスクロールになるレイヤーの bitmask |

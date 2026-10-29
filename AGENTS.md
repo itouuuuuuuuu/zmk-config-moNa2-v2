@@ -113,6 +113,7 @@ roBa のキーマップを移植するときは、各レイヤーから roBa の
 | `scale-divisor` | 同上 | 4 | スクロール速度。大きいほど遅い |
 | `CONFIG_PMW3610_RUN_DOWNSHIFT_TIME_MS` | `config/mona2_r.conf` | 3264 | 省電力に落ちるまでの時間 (最大値)。roBa と同じ |
 | `CONFIG_PMW3610_REST1_SAMPLE_TIME_MS` | `config/mona2_r.conf` | 20 | 省電力時のサンプル間隔。roBa と同じ |
+| `CONFIG_PMW3610_REPORT_INTERVAL_MIN` | `config/mona2_r.conf` | 8 | HID レポートの最小間隔 (ms)。センサーは 4ms で読み続け、移動量を合算して送る。BLE (接続間隔 15ms 前後) でキューが詰まりラグになるのを防ぐ。USB 専用なら 4 か 0 |
 
 - 省電力の 2 項目はデフォルト (128ms / 40ms) だと動き出しが鈍く「慣性があるように」感じるため変更した。依頼がない限り戻さない。
 - `force-awake` の 2 項目は、roBa では反応するボール (Keychron) が moNa2 で反応しなかったため追加した。badjeff 版ドライバはこの指定が無いと性能レジスタ (0x11) に触らず、センサー既定の 8ms で動く。電池持ちとのトレードオフなので、不要になったら外してよい。
